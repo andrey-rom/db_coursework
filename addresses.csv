@@ -1,0 +1,6 @@
+customer_id,address_line1,address_line2,city,state,country,is_default
+1,123 Diamond Ave,NULL,New York,NY,USA,TRUE
+2,456 Ruby St,Suite 2,Los Angeles,CA,USA,FALSE
+3,789 Sapphire Blvd,NULL,Chicago,IL,USA,TRUE
+4,101 Emerald Rd,NULL,Houston,TX,USA,FALSE
+5,321 Pearl Ln,NULL,Miami,FL,USA,TRUE
