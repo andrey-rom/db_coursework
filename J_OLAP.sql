@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS Dim_Time CASCADE;
 DROP TABLE IF EXISTS Dim_Product CASCADE;
 DROP TABLE IF EXISTS Dim_Customer CASCADE;
 
--- Dimension: Dim_Customer (SCD Type 2)
 CREATE TABLE Dim_Customer (
     customer_key SERIAL PRIMARY KEY,
     customer_id INT NOT NULL,         -- Original OLTP customer id
@@ -18,7 +17,6 @@ CREATE TABLE Dim_Customer (
     is_current BOOLEAN NOT NULL       -- TRUE if this is the current record
 );
 
--- Dimension: Dim_Product
 CREATE TABLE Dim_Product (
     product_key SERIAL PRIMARY KEY,
     product_id INT NOT NULL,          -- Original OLTP product id
@@ -29,7 +27,6 @@ CREATE TABLE Dim_Product (
     brand TEXT
 );
 
--- Dimension: Dim_Time
 CREATE TABLE Dim_Time (
     time_key SERIAL PRIMARY KEY,
     date DATE NOT NULL,
@@ -39,8 +36,8 @@ CREATE TABLE Dim_Time (
     year INT
 );
 
--- Dimension: Dim_Location
--- This can capture shipping destination details
+
+-- capturing shipping destination details
 CREATE TABLE Dim_Location (
     location_key SERIAL PRIMARY KEY,
     city TEXT,
@@ -48,8 +45,8 @@ CREATE TABLE Dim_Location (
     country TEXT
 );
 
--- Fact Table: Fact_Sales
--- Aggregates order-level sales data from the OLTP system
+
+-- aggregates order-level sales data from the OLTP system
 CREATE TABLE Fact_Sales (
     order_id INT PRIMARY KEY,         -- Matches OLTP order id
     customer_key INT REFERENCES Dim_Customer(customer_key),
@@ -59,8 +56,8 @@ CREATE TABLE Fact_Sales (
     total_sales NUMERIC(10,2)         -- Sum of the order's total amount
 );
 
--- Fact Table: Fact_Shipping
--- Captures shipping details for orders (repurposed from the food delivery fact)
+
+-- captures shipping details for orders )
 CREATE TABLE Fact_Shipping (
     shipping_id SERIAL PRIMARY KEY,
     order_id INT REFERENCES Fact_Sales(order_id),
