@@ -1,5 +1,3 @@
-Jewelry_OLTPtoOLAP_ETL.sql
-
 -- 1. Setup FDW to connect to the OLTP database (adjust host, dbname, port, user, password as needed)
 DROP EXTENSION IF EXISTS postgres_fdw CASCADE;
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;
