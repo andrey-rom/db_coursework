@@ -1,4 +1,3 @@
--- Drop tables in reverse order of dependencies for rerunnability
 DROP TABLE IF EXISTS Order_Details CASCADE;
 DROP TABLE IF EXISTS Orders CASCADE;
 DROP TABLE IF EXISTS Liked_Products CASCADE;
@@ -8,7 +7,6 @@ DROP TABLE IF EXISTS Addresses CASCADE;
 DROP TABLE IF EXISTS Admins CASCADE;
 DROP TABLE IF EXISTS Customers CASCADE;
 
--- Create Customers table (replaces Users)
 CREATE TABLE Customers (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -18,7 +16,6 @@ CREATE TABLE Customers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create Addresses table
 CREATE TABLE Addresses (
     id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES Customers(id) ON DELETE CASCADE,
@@ -30,14 +27,12 @@ CREATE TABLE Addresses (
     is_default BOOLEAN DEFAULT FALSE
 );
 
--- Create Categories table (jewelry categories: Rings, Necklaces, etc.)
 CREATE TABLE Categories (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT
 );
 
--- Create Products table with jewelry-specific attributes
 CREATE TABLE Products (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -49,7 +44,6 @@ CREATE TABLE Products (
     availability_status BOOLEAN DEFAULT TRUE
 );
 
--- Create Orders table
 CREATE TABLE Orders (
     id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES Customers(id) ON DELETE CASCADE,
@@ -60,7 +54,6 @@ CREATE TABLE Orders (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create Order_Details table (line items for each order)
 CREATE TABLE Order_Details (
     id SERIAL PRIMARY KEY,
     order_id INT REFERENCES Orders(id) ON DELETE CASCADE,
@@ -69,7 +62,6 @@ CREATE TABLE Order_Details (
     price NUMERIC(10,2) NOT NULL
 );
 
--- Create Admins table
 CREATE TABLE Admins (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -78,7 +70,6 @@ CREATE TABLE Admins (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create Liked_Products table to track which products are liked by customers
 CREATE TABLE Liked_Products (
     customer_id INT REFERENCES Customers(id) ON DELETE CASCADE,
     product_id INT REFERENCES Products(id) ON DELETE CASCADE,
