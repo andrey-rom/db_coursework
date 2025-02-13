@@ -1,4 +1,4 @@
-OLTP Schema
+1. OLTP Schema
 
 Schema Overview:
 The OLTP database is designed to support the full user action flow for the jewelry store. It is implemented in 3NF and comprises eight tables:
