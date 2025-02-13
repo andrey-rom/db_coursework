@@ -72,3 +72,7 @@ OLAP Queries:
 Example: Aggregating monthly orders and total revenue by jewelry category over the last year.
 Purpose:
 These queries provide insights into transactional behavior and aggregated analytics, meeting the coursework requirements.
+
+File names:
+OLAP_Queries.sql
+OLTP_Queries.sql
